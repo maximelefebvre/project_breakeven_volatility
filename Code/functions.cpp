@@ -45,12 +45,13 @@ namespace func
         
         if(Call == true)
         {
-            return Spot*std::exp(-DY*Maturity)*Gaussian_Distrib_CDF(d1) - Strike*std::exp(-IR*Maturity)*Gaussian_Distrib_CDF(d2);
+            double z=1.0;
         }
         else
         {
-            return -Spot*std::exp(-DY*Maturity)*Gaussian_Distrib_CDF(-d1) + Strike*std::exp(-IR*Maturity)*Gaussian_Distrib_CDF(-d2);
+            double z=-1.0;
         }
+        return z*(Spot*std::exp(-DY*Maturity)*Gaussian_Distrib_CDF(z*d1) - Strike*std::exp(-IR*Maturity)*Gaussian_Distrib_CDF(z*d2));
     }
     
     double BlackScholes_Delta(double Spot, double Strike, double Volatility, double IR, double DY, double Maturity,bool Call)
@@ -60,11 +61,12 @@ namespace func
         
         if(Call == true)
         {
-            return Gaussian_Distrib_CDF(d1);
+            double z=1.0;
         }
         else
         {
-            return Gaussian_Distrib_CDF(d1)-1;
+            double z=-1.0;
         }
+        return z*Gaussian_Distrib_CDF(z*d1);
     }
 }

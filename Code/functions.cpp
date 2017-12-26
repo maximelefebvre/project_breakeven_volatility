@@ -69,4 +69,11 @@ namespace func
         }
         return z*Gaussian_Distrib_CDF(z*d1);
     }
+    double BlackScholes_Gamma(double Spot, double Strike, double Volatility, double IR, double DY, double Maturity)
+    // No need to specify "Call" or "Put" since Gamma is equal for either
+    {
+        double d1=(std::log(Spot/Strike)+(IR-DY+0.5*Volatility*Volatility)*Maturity)/(Volatility*std::sqrt(Maturity));
+        
+        return std::exp(-DY*Maturity)*Gaussian_Distrib_PDF(d1)/(Spot*Volatility*std::sqrt(Maturity))
+    }
 }

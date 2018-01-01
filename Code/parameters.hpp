@@ -15,16 +15,17 @@ namespace model_params
     class InterestRate
     {
     public:
+        InterestRate(const double IR);
         virtual ~InterestRate();
         
         void print_IR() const;
-        
-        InterestRate(const InterestRate& rhs) = delete;
-        InterestRate& operator=(const InterestRate& rhs) = delete;
-        InterestRate(InterestRate&& rhs) = delete;
-        InterestRate& operator=(InterestRate&& rhs) = delete;
+        double value() const;
+    
+        //InterestRate(const InterestRate& rhs) = delete;
+        //InterestRate& operator=(const InterestRate& rhs) = delete;
+        //InterestRate(InterestRate&& rhs) = delete;
+        //InterestRate& operator=(InterestRate&& rhs) = delete;
     protected:
-        InterestRate(const double IR);
     private:
         double m_IR_value;
     };
@@ -32,16 +33,17 @@ namespace model_params
     class DividendYield
     {
     public:
+        DividendYield(const double DY);
         virtual ~DividendYield();
         
         void print_DY() const;
+        double value() const;
         
-        DividendYield(const DividendYield& rhs) = delete;
-        DividendYield& operator=(const DividendYield& rhs) = delete;
-        DividendYield(DividendYield&& rhs) = delete;
-        DividendYield& operator=(DividendYield&& rhs) = delete;
+        //DividendYield(const DividendYield& rhs) = delete;
+        //DividendYield& operator=(const DividendYield& rhs) = delete;
+        //DividendYield(DividendYield&& rhs) = delete;
+        //DividendYield& operator=(DividendYield&& rhs) = delete;
     protected:
-        DividendYield(const double DY);
     private:
         double m_DY_value;
     };
@@ -49,50 +51,53 @@ namespace model_params
     class Spot
     {
     public:
+        Spot(const double val);
         virtual ~Spot();
         
         void print_Spot() const;
+        double value() const;
         
-        Spot(const Spot& rhs) = delete;
-        Spot& operator=(const Spot& rhs) = delete;
-        Spot(Spot&& rhs) = delete;
-        Spot& operator=(Spot&& rhs) = delete;
+        //Spot(const Spot& rhs) = delete;
+        //Spot& operator=(const Spot& rhs) = delete;
+        //Spot(Spot&& rhs) = delete;
+        //Spot& operator=(Spot&& rhs) = delete;
     protected:
-        Spot(const double val);
     private:
         double m_Spot_value;
     };
     
-    class Strikes
+    class Strike
     {
     public:
-        virtual ~Strikes();
+        Strike(const double strike);
+        virtual ~Strike();
         
-        void print_Strikes() const;
+        void print_Strike() const;
+        double value() const;
         
-        Strikes(const Strikes& rhs) = delete;
-        Strikes& operator=(const Strikes& rhs) = delete;
-        Strikes(Strikes&& rhs) = delete;
-        Strikes& operator=(Strikes&& rhs) = delete;
+        //Strike(const Strike& rhs) = delete;
+        //Strike& operator=(const Strike& rhs) = delete;
+        //Strike(Strike&& rhs) = delete;
+        //Strike& operator=(Strike&& rhs) = delete;
     protected:
-        Strikes(const std::vector<double> strikes);
     private:
-        std::vector<double> m_Strikes_value;
+        double m_Strike_value;
     };
     
     class Volatility
     {
     public:
+        Volatility(const double vol);
         virtual ~Volatility();
         
         void print_Volatility() const;
+        double value() const;
         
-        Volatility(const Volatility& rhs) = delete;
-        Volatility& operator=(const Volatility& rhs) = delete;
-        Volatility(Volatility&& rhs) = delete;
-        Volatility& operator=(Volatility&& rhs) = delete;
+        //Volatility(const Volatility& rhs) = delete;
+        //Volatility& operator=(const Volatility& rhs) = delete;
+        //Volatility(Volatility&& rhs) = delete;
+        //Volatility& operator=(Volatility&& rhs) = delete;
     protected:
-        Volatility(const double vol);
     private:
         double m_Volatility_value;
     };
@@ -100,16 +105,17 @@ namespace model_params
     class Maturity
     {
     public:
+        Maturity(const double maturity);
         virtual ~Maturity();
         
         void print_Maturity() const;
+        double value() const;
         
-        Maturity(const Maturity& rhs) = delete;
-        Maturity& operator=(const Maturity& rhs) = delete;
-        Maturity(Maturity&& rhs) = delete;
-        Maturity& operator=(Maturity&& rhs) = delete;
+        //Maturity(const Maturity& rhs) = delete;
+        //Maturity& operator=(const Maturity& rhs) = delete;
+        //Maturity(Maturity&& rhs) = delete;
+        //Maturity& operator=(Maturity&& rhs) = delete;
     protected:
-        Maturity(const double maturity);
     private:
         double m_Maturity_value;
     };

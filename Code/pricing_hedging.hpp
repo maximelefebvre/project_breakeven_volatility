@@ -14,25 +14,22 @@
 
 namespace model
 {
-    enum class TypeOption
-    {
-        Call,
-        Put
-    };
     
     class EuropeanOption
     {
     public:
-        EuropeanOption(TypeOption typeoption, Spot* spot, Strikes* strikes, InterestRate* ir, DividendYield* dy, Volatility* volatility, Maturity* maturity);
+        EuropeanOption(std::string typeoption, model_params::Spot spot, model_params::Strike strike, model_params::InterestRate ir, model_params::DividendYield dy, model_params::Volatility volatility, model_params::Maturity maturity);
+        double Price();
+        double Delta();
     protected:
     private:
-        TypeOption m_TypeOption;
-        model_params::Spot* p_Spot;
-        model_params::Strikes* p_Strikes;
-        model_params::InterestRate* p_IR;
-        model_params::DividendYield* p_DY;
-        model_params::Volatility* p_Volatility;
-        model_params::Maturity* p_Maturity;
+        std::string m_TypeOption;
+        model_params::Spot m_Spot;
+        model_params::Strike m_Strike;
+        model_params::InterestRate m_IR;
+        model_params::DividendYield m_DY;
+        model_params::Volatility m_Volatility;
+        model_params::Maturity m_Maturity;
 
     };
 }

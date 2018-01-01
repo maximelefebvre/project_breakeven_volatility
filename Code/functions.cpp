@@ -42,14 +42,14 @@ namespace func
     {
         double d1 = (std::log(Spot/Strike) + (IR - DY + 0.5*Volatility*Volatility)*Maturity) / (Volatility * std::sqrt(Maturity));
         double d2 = d1 - Volatility * std::sqrt(Maturity);
-        
+        double z=0.0;
         if(Call == true)
         {
-            double z=1.0;
+            z=1.0;
         }
         else
         {
-            double z=-1.0;
+            z=-1.0;
         }
         return z*(Spot*std::exp(-DY*Maturity)*Gaussian_Distrib_CDF(z*d1) - Strike*std::exp(-IR*Maturity)*Gaussian_Distrib_CDF(z*d2));
     }
@@ -59,21 +59,23 @@ namespace func
         double d1 = (std::log(Spot/Strike) + (IR - DY + 0.5*Volatility*Volatility)*Maturity) / (Volatility * std::sqrt(Maturity));
         double d2 = d1 - Volatility * std::sqrt(Maturity);
         
+        double z=0.0;
         if(Call == true)
         {
-            double z=1.0;
+            z=1.0;
         }
         else
         {
-            double z=-1.0;
+            z=-1.0;
         }
         return z*Gaussian_Distrib_CDF(z*d1);
     }
+    
     double BlackScholes_Gamma(double Spot, double Strike, double Volatility, double IR, double DY, double Maturity)
     // No need to specify "Call" or "Put" since Gamma is equal for either
     {
         double d1=(std::log(Spot/Strike)+(IR-DY+0.5*Volatility*Volatility)*Maturity)/(Volatility*std::sqrt(Maturity));
         
-        return std::exp(-DY*Maturity)*Gaussian_Distrib_PDF(d1)/(Spot*Volatility*std::sqrt(Maturity))
+        return std::exp(-DY*Maturity)*Gaussian_Distrib_PDF(d1)/(Spot*Volatility*std::sqrt(Maturity));
     }
 }

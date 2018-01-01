@@ -31,6 +31,12 @@ namespace model_params
         std::cout << "The Interest Rate is: " << m_IR_value << std::endl;
     }
     
+    double InterestRate::value() const
+    {
+        return m_IR_value;
+    }
+    
+    
     
     //////////////////////////////////////////////////////
     /////////////// CLASS DIVIDEND YIELD
@@ -51,6 +57,12 @@ namespace model_params
     {
         std::cout << "The DividendYield is: " << m_DY_value << std::endl;
     }
+    
+    double DividendYield::value() const
+    {
+        return m_DY_value;
+    }
+    
     
     
     //////////////////////////////////////////////////////
@@ -73,30 +85,37 @@ namespace model_params
         std::cout << "The Spot is: " << m_Spot_value << std::endl;
     }
     
+    double Spot::value() const
+    {
+        return m_Spot_value;
+    }
+    
     
     
     //////////////////////////////////////////////////////
     /////////////// CLASS STRIKES
     //////////////////////////////////////////////////////
     
-    Strikes::Strikes(const std::vector<double> strikes)
-    : m_Strikes_value(strikes)
+    Strike::Strike(const double strike)
+    : m_Strike_value(strike)
     {
-        std::cout << "Use Constructor of Strikes" << std::endl;
+        std::cout << "Use Constructor of Strike" << std::endl;
     }
     
-    Strikes::~Strikes()
+    Strike::~Strike()
     {
-        std::cout << "Use Destructor of Strikes" << std::endl;
+        std::cout << "Use Destructor of Strike" << std::endl;
     }
     
-    void Strikes::print_Strikes() const
+    void Strike::print_Strike() const
     {
-        std::cout << "Strikes: (";
-        std:copy(m_Strikes_value.begin(), m_Strikes_value.end(), std::ostream_iterator<double>(std::cout,","));
-        std::cout << ")" << std::endl;
+        std::cout << "The Strike is: " << m_Strike_value << std::endl;
     }
-
+    
+    double Strike::value() const
+    {
+        return m_Strike_value;
+    }
     
     
     
@@ -120,6 +139,10 @@ namespace model_params
         std::cout << "The Volatility is: " << m_Volatility_value << std::endl;
     }
     
+    double Volatility::value() const
+    {
+        return m_Volatility_value;
+    }
     
     
     
@@ -141,6 +164,11 @@ namespace model_params
     void Maturity::print_Maturity() const
     {
         std::cout << "The Maturity is: " << m_Maturity_value << std::endl;
+    }
+    
+    double Maturity::value() const
+    {
+        return m_Maturity_value;
     }
     
     

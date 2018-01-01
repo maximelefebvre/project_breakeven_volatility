@@ -56,4 +56,10 @@ namespace model
     }
     
     
+    double EuropeanOption::Cash()
+    {
+        return Price() - Delta() * m_Spot.value();
+    }
+    
+    
 }

@@ -21,6 +21,7 @@ namespace model
         EuropeanOption(std::string typeoption, model_params::Spot spot, model_params::Strike strike, model_params::InterestRate ir, model_params::DividendYield dy, model_params::Volatility volatility, model_params::Maturity maturity);
         double Price();
         double Delta();
+        double Cash();
     protected:
     private:
         std::string m_TypeOption;

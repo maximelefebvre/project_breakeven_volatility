@@ -55,6 +55,11 @@ namespace model
         return z*func::Gaussian_Distrib_CDF(z*d1);
     }
     
+    double EuropeanOption::DeltaCash()
+    {
+        return Delta() * m_Spot.value();
+    }
+    
     
     double EuropeanOption::Cash()
     {

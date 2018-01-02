@@ -30,22 +30,22 @@ double ValueOfPnL(const double volatility, const double strikeprice, const doubl
     
     std::vector<double> Prices(LengthVector,0.0);
     std::vector<double> Delta(LengthVector,0.0);
-    std::vector<double> DeltaCashPositions(LengthVector,0.0);
+    std::vector<double> SpotPositions(LengthVector,0.0);
     std::vector<double> CashPositions(LengthVector,0.0);
-    std::vector<double> PnLVector(LengthVector-1,0.0);
+    std::vector<double> PnLVector(LengthVector,0.0);
     
     for(std::size_t i = 0;i<LengthVector;++i)
     {
-        model_params::Maturity mat2( maturity -i/LengthVector);
+        model_params::Maturity mat2(maturity*(1.0-i/LengthVector));
         model::EuropeanOption option2("Call", Spots[i], strike, ir, dy, vol, mat2);
         Prices[i] = option2.Price();
         Delta[i] = option2.Delta();
-        DeltaCashPositions[i] = option2.DeltaCash();
+        SpotPositions[i] = option2.UnderlyingH();
         CashPositions[i] = option2.Cash();
         
         if(i > 0)
         {
-            PnLVector[i] = (Prices[i] - Prices[i-1]) - Delta[i-1]*(Spots[i]-Spots[i-1]) - std::exp(ir.value() * 1/LengthVector)*CashPositions[i-1];
+            PnLVector[i] = (Prices[i] - Prices[i-1]) - Delta[i-1]*(Spots[i]-Spots[i-1]) - std::exp(ir.value() *maturity/LengthVector)*CashPositions[i-1];
         }
     }
     double PnL = std::accumulate(PnLVector.begin(), PnLVector.end(), 0);
@@ -59,7 +59,6 @@ double FindVolatility(const double strikeprice, const double maturity, const std
     double temp = (LowerBound+UpperBound)/2;
     while(std::abs(ValueOfPnL(temp,strikeprice,maturity,Spots)) > std::pow(10,-3))
     {
-        temp = (LowerBound+UpperBound)/2;
         if(ValueOfPnL(temp,strikeprice,maturity,Spots) >= 0)
         {
             LowerBound = temp;
@@ -68,6 +67,7 @@ double FindVolatility(const double strikeprice, const double maturity, const std
         {
             UpperBound = temp;
         }
+        temp = (LowerBound+UpperBound)/2;
     }
     return temp;
 }

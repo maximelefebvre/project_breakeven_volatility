@@ -55,7 +55,7 @@ namespace model
         return z*func::Gaussian_Distrib_CDF(z*d1);
     }
     
-    double EuropeanOption::DeltaCash()
+    double EuropeanOption::UnderlyingH()
     {
         return Delta() * m_Spot.value();
     }
@@ -63,7 +63,7 @@ namespace model
     
     double EuropeanOption::Cash()
     {
-        return Price() - Delta() * m_Spot.value();
+        return Price() - UnderlyingH();
     }
     
     

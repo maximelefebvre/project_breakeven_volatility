@@ -51,9 +51,13 @@ array
 -
 cmath
 -
+fstream
+-
 iostream
 -
 iterator
+-
+numeric
 -
 sstream
 -
@@ -68,6 +72,8 @@ algorithm
 array
 -
 cmath
+-
+fstream
 -
 iostream
 -

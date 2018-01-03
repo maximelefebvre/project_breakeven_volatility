@@ -1,6 +1,7 @@
 #include <algorithm>
 #include <array>
 #include <cmath>
+#include <fstream>
 #include <iostream>
 #include <iterator>
 #include <numeric>
@@ -55,7 +56,7 @@ double ValueOfPnL(const double volatility, const double strikeprice, const doubl
 double FindVolatility(const double strikeprice, const double maturity, const std::vector<double> Spots)
 {
     double LowerBound = 0.;
-    double UpperBound = 50.;
+    double UpperBound = 25.;
     double temp = (LowerBound+UpperBound)/2;
     while(std::abs(ValueOfPnL(temp,strikeprice,maturity,Spots)) > std::pow(10,-3))
     {
@@ -72,7 +73,7 @@ double FindVolatility(const double strikeprice, const double maturity, const std
     return temp;
 }
 
-int main(int argc, char* argv[])
+void BreakEvenVolatility()
 {
     std::vector<double> Spots(5,0.0);
     Spots[0] = 2500.0;
@@ -82,7 +83,7 @@ int main(int argc, char* argv[])
     Spots[4] = 2400.0;
     
     std::vector<double> Strikes({2000.0,2100.0,2200.0,2300.0,2400.0,2500.0});
-    //std::vector<double> VolatilitySmile(Strikes.size(),0.);
+    std::vector<double> VolatilitySmile(Strikes.size(),0.);
     
     for(std::size_t i = 0;i<Strikes.size();++i)
     {
@@ -91,11 +92,18 @@ int main(int argc, char* argv[])
         //VolatilitySmile[i] = vol;
     }
     
-    /*std::cout << "Volatility Smile : (";
+    std::cout << "Volatility Smile : (";
     for(std::size_t i = 0;i<Strikes.size();++i)
     {
         std::cout << VolatilitySmile[i] << ",";
     }
-    std::cout << ")" << std::endl; */
+    std::cout << ")" << std::endl;
+}
+
+
+
+int main(int argc, char* argv[])
+{
+
     return 0;
 }

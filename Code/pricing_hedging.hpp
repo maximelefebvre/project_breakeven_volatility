@@ -20,6 +20,11 @@ namespace model
     public:
         EuropeanOption(std::string typeoption, model_params::Spot spot, model_params::Strike strike, model_params::InterestRate ir, model_params::DividendYield dy, model_params::Volatility volatility, model_params::Maturity maturity);
         ~EuropeanOption();
+        EuropeanOption(const EuropeanOption& rhs);
+        EuropeanOption& operator=(const EuropeanOption& rhs);
+        EuropeanOption(EuropeanOption&& rhs);
+        EuropeanOption& operator=(EuropeanOption&& rhs);
+        
         double Price();
         double Delta();
         double UnderlyingH();

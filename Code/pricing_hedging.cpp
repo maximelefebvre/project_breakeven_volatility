@@ -26,6 +26,39 @@ namespace model
         
     }
     
+    EuropeanOption(const EuropeanOption& rhs)
+    : m_TypeOption(rhs.m_TypeOption), m_Spot(rhs.m_Spot), m_Strike(rhs.m_Strike), m_IR(rhs.m_IR), m_DY(rhs.m_DY), m_Volatility(rhs.m_Volatility), m_Maturity(rhs.m_Maturity)
+    {
+        
+    }
+    
+    EuropeanOption& operator=(const EuropeanOption& rhs)
+    {
+        m_TypeOption = rhs.m_TypeOption;
+        m_Spot = rhs.m_Spot;
+        m_Strike = rhs.m_Strike;
+        m_IR = rhs.m_IR;
+        m_DY = rhs.m_DY;
+        m_Volatility = rhs.m_Volatility;
+        m_Maturity = rhs.m_Maturity;
+    }
+    
+    EuropeanOption(EuropeanOption&& rhs)
+    : m_TypeOption(std::move(rhs.m_TypeOption)), m_Spot(std::move(rhs.m_Spot)), m_Strike(std::move(rhs.m_Strike)), m_IR(std::move(rhs.m_IR)), m_DY(std::move(rhs.m_DY)), m_Volatility(std::move(rhs.m_Volatility)), m_Maturity(std::move(rhs.m_Maturity))
+    {
+        
+    }
+    
+    EuropeanOption& operator=(EuropeanOption&& rhs)
+    {
+        std::swap(m_TypeOption,rhs.m_TypeOption);
+        std::swap(m_Spot,rhs.m_Spot);
+        std::swap(m_Strike,rhs.m_Strike);
+        std::swap(m_IR,rhs.m_IR);
+        std::swap(m_DY,rhs.m_DY);
+        std::swap(m_Volatility,rhs.m_Volatility);
+        std::swap(m_Maturity,rhs.m_Maturity);
+    }
     
     double EuropeanOption::Price()
     {

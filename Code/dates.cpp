@@ -4,20 +4,20 @@
 //// Construction //
 date::date(const int& dd, const int& mm, const int& yyyy)
 {
-    day_ = dd
-    month_ = mm
-    year_ = yyyy // User must give year fully (4 digits)
+    day_ = dd;
+    month_ = mm;
+    year_ = yyyy; // User must give year fully (4 digits)
 };
 
 date::~date()
 {
-    day_ = 0
-    month_ = 0
-    year_ = 0
+    day_ = 0;
+    month_ = 0;
+    year_ = 0;
 }
 
 //// Inline definitions ////
-date::date(){year_ = 0, month_ = 0, day_ = 0};
+date::date(){year_ = 0; month_ = 0; day_ = 0;};
 
 int date::day() const
 {
@@ -29,22 +29,22 @@ int date::month() const
     return month_;
 };
 
-int date::year const
+int date::year() const
 {
     return year_;
 };
 
-void set_day(const int& day )
+void date::set_day(const int& day )
 {
     date::day_ = day;
 };
 
-void set_month(const int& month )
+void date::set_month(const int& month )
 {
     date::month_ = month;
 };
 
-void set_year(const int& year )
+void date::set_year(const int& year )
 {
     date::year_ = year;
 };
@@ -92,7 +92,7 @@ bool operator < (const date& d1, const date& d2)
             else return false;
         };
     };
-    return false
+    return false;
 }
 
 
@@ -139,27 +139,27 @@ inline date previous_date(const date& d)
 
 date date::operator ++(int) // postfix incrementation operator
 {
-    date d = *this
-    *this = next_date(*this)
+    date d = *this;
+    *this = next_date(*this);
     return d;
 }
 
 date date::operator ++() // prefix operator
 {
-    *this = next_date(*this)
+    *this = next_date(*this);
     return *this;
 }
 
 date date::operator --(int) // postfix decrementation operator
 {
-    date d = *this
-    *this = previous_date(*this)
+    date d = *this;
+    *this = previous_date(*this);
     return d;
 }
 
 date date::operator --() // prefix decrementation operator
 {
-    *this = previous_date(*this)
+    *this = previous_date(*this);
     return *this;
 }
 
@@ -180,63 +180,61 @@ date operator + (const date& d, const int& days)
 {
     if(!d.valid()) return date();
     if (days <0) return d-(-days);
-    date temp=d
+    date temp=d;
     for (int i=1;i<=days;++i)
     {
         temp=next_date(temp);
     };
-    return temp
+    return temp;
 }
 
 date operator += (const date& d, const int& days)
 {
-    d=(d+days);
-    return d;
+    return (d+days);
 }
 
 date operator - (const date& d, const int& days)
 {
     if(!d.valid()) return date();
     if (days <0) return d-(-days);
-    date temp=d
+    date temp=d;
     for (int i=1;i<=days;++i)
     {
         temp=previous_date(temp);
     };
-    return temp
+    return temp;
 }
 
 date operator -= (const date& d, const int& days)
 {
-    d=(d-days);
-    return d
+    return (d-days);
 }
 
 int operator - (const date& d1, const date& d2)
 {
-    if(!d1.valid()) return d1;
-    if(!d2.valid()) return d2;
-    if (d1=d2) return 0;
-    else if d1>d2
+    if(!d1.valid()||!d2.valid()) return 0;
+    cout << "Invalid date /n";
+    if (d1==d2) return 0;
+    else if (d1>d2)
     {
         date temp=d1;
-        int i=0
+        int i=0;
         while (temp>d2)
         {
-            ++i
-            temp=previous_date(temp)
+            ++i;
+            temp=previous_date(temp);
         }
-        return i
-    };
+        return i;
+    }
     else
     {
-        date temp=d1
-        int i=0
+        date temp=d1;
+        int i=0;
         while (temp<d2)
         {
-            --i
-            temp=next_date(temp)
+            --i;
+            temp=next_date(temp);
         }
-        return i
+        return i;
     };
 }

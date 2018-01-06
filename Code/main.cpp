@@ -78,14 +78,14 @@ double ValueOfPnL(const double volatility, const double strikeprice, const date 
     return PnL;
 }
 
-double FindVolatility(const double strikeprice, const double maturity, const std::vector<double> Spots)
+double FindVolatility(const double strikeprice, const date StartDate, const date EndDate, const std::vector<double> Spots)
 {
     double LowerBound = 0.;
     double UpperBound = 1000.;
     double temp = (LowerBound+UpperBound)/2;
-    while(std::abs(ValueOfPnL(temp/100.,strikeprice,maturity,Spots)) > std::pow(10,-3))
+    while(std::abs(ValueOfPnL(temp/100.,strikeprice,StartDate, EndDate, Spots)) > std::pow(10,-3))
     {
-        if(ValueOfPnL(temp/100.,strikeprice,maturity,Spots) >= 0)
+        if(ValueOfPnL(temp/100.,strikeprice,StartDate, EndDate, Spots) >= 0)
         {
             LowerBound = temp;
         }
@@ -112,7 +112,7 @@ void BreakEvenVolatility()
     
     for(std::size_t i = 0;i<Strikes.size();++i)
     {
-        double vol = FindVolatility(Strikes[i],1.0,Spots);
+        double vol = FindVolatility(Strikes[i],date(2016,06,30),date(2017,06,30),Spots);
         std::cout << vol << std::endl;
         VolatilitySmile[i] = vol;
     }

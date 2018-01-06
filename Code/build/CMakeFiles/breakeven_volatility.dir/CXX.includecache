@@ -6,6 +6,14 @@
 
 #IncludeRegexTransform: 
 
+/Users/maximelefebvre/Dropbox/5A/S1/C++/Project/project_breakeven_volatility/Code/dates.cpp
+dates.hpp
+/Users/maximelefebvre/Dropbox/5A/S1/C++/Project/project_breakeven_volatility/Code/dates.hpp
+
+/Users/maximelefebvre/Dropbox/5A/S1/C++/Project/project_breakeven_volatility/Code/dates.hpp
+iostream
+-
+
 /Users/maximelefebvre/Dropbox/5A/S1/C++/Project/project_breakeven_volatility/Code/functions.cpp
 functions.hpp
 /Users/maximelefebvre/Dropbox/5A/S1/C++/Project/project_breakeven_volatility/Code/functions.hpp
@@ -119,6 +127,8 @@ parameters.hpp
 /Users/maximelefebvre/Dropbox/5A/S1/C++/Project/project_breakeven_volatility/Code/parameters.hpp
 pricing_hedging.hpp
 /Users/maximelefebvre/Dropbox/5A/S1/C++/Project/project_breakeven_volatility/Code/pricing_hedging.hpp
+dates.hpp
+/Users/maximelefebvre/Dropbox/5A/S1/C++/Project/project_breakeven_volatility/Code/dates.hpp
 
 /Users/maximelefebvre/Dropbox/5A/S1/C++/Project/project_breakeven_volatility/Code/parameters.cpp
 parameters.hpp

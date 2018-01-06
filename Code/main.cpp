@@ -130,7 +130,7 @@ void BreakEvenVolatility()
 int main(int argc, char* argv[])
 {
     std::string name("SPX500.csv");
-    data_t Prices = get_data(name);
+    data_importation::data_t Prices = data_importation::get_data(name);
     std::ifstream infile(name);
     //std::string str;
     //infile >> str;

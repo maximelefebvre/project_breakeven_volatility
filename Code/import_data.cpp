@@ -79,10 +79,10 @@ namespace data_importation
         infile >> data;
         
         // Complain if something went wrong.
-        /*if (!infile.eof())
+        if (!infile.eof())
          {
          throw std::runtime_error("Problem with your data");
-         }*/
+         }
         
         infile.close();
         

@@ -18,12 +18,34 @@ namespace model_params
     InterestRate::InterestRate(const double IR)
     : m_IR_value(IR)
     {
-        std::cout << "Use Constructor of Interest Rate" << std::endl;
+
     }
     
     InterestRate::~InterestRate()
     {
-        std::cout << "Use Destructor of Interest Rate" << std::endl;
+        m_IR_value = 0;
+    }
+    
+    InterestRate::InterestRate(const InterestRate& rhs)
+    : m_IR_value(rhs.m_IR_value)
+    {
+        
+    }
+    
+    InterestRate& InterestRate::operator=(const InterestRate& rhs)
+    {
+        m_IR_value = rhs.m_IR_value;
+    }
+    
+    InterestRate::InterestRate(InterestRate&& rhs)
+    : m_IR_value(std::move(rhs.m_IR_value))
+    {
+        
+    }
+    
+    InterestRate& InterestRate::operator=(InterestRate&& rhs)
+    {
+        std::swap(m_IR_value,rhs.m_IR_value);
     }
     
     void InterestRate::print_IR() const
@@ -45,12 +67,34 @@ namespace model_params
     DividendYield::DividendYield(const double DY)
     : m_DY_value(DY)
     {
-        std::cout << "Use Constructor of DividendYield" << std::endl;
+
     }
     
     DividendYield::~DividendYield()
     {
-        std::cout << "Use Destructor of DividendYield" << std::endl;
+        m_DY_value = 0;
+    }
+    
+    DividendYield::DividendYield(const DividendYield& rhs)
+    : m_DY_value(rhs.m_DY_value)
+    {
+        
+    }
+    
+    DividendYield& DividendYield::operator=(const DividendYield& rhs)
+    {
+        m_DY_value = rhs.m_DY_value;
+    }
+    
+    DividendYield::DividendYield(DividendYield&& rhs)
+    : m_DY_value(std::move(rhs.m_DY_value))
+    {
+        
+    }
+    
+    DividendYield& DividendYield::operator=(DividendYield&& rhs)
+    {
+        std::swap(m_DY_value,rhs.m_DY_value);
     }
     
     void DividendYield::print_DY() const
@@ -72,12 +116,34 @@ namespace model_params
     Spot::Spot(const double val)
     : m_Spot_value(val)
     {
-        std::cout << "Use Constructor of Spot" << std::endl;
+
     }
     
     Spot::~Spot()
     {
-        std::cout << "Use Destructor of Spot" << std::endl;
+        m_Spot_value = 0;
+    }
+    
+    Spot::Spot(const Spot& rhs)
+    : m_Spot_value(rhs.m_Spot_value)
+    {
+        
+    }
+    
+    Spot& Spot::operator=(const Spot& rhs)
+    {
+        m_Spot_value = rhs.m_Spot_value;
+    }
+    
+    Spot::Spot(Spot&& rhs)
+    : m_Spot_value(std::move(rhs.m_Spot_value))
+    {
+        
+    }
+    
+    Spot& Spot::operator=(Spot&& rhs)
+    {
+        std::swap(m_Spot_value,rhs.m_Spot_value);
     }
     
     void Spot::print_Spot() const
@@ -99,12 +165,34 @@ namespace model_params
     Strike::Strike(const double strike)
     : m_Strike_value(strike)
     {
-        std::cout << "Use Constructor of Strike" << std::endl;
+
     }
     
     Strike::~Strike()
     {
-        std::cout << "Use Destructor of Strike" << std::endl;
+        m_Strike_value = 0;
+    }
+    
+    Strike::Strike(const Strike& rhs)
+    : m_Strike_value(rhs.m_Strike_value)
+    {
+        
+    }
+    
+    Strike& Strike::operator=(const Strike& rhs)
+    {
+        m_Strike_value = rhs.m_Strike_value;
+    }
+    
+    Strike::Strike(Strike&& rhs)
+    : m_Strike_value(std::move(rhs.m_Strike_value))
+    {
+        
+    }
+    
+    Strike& Strike::operator=(Strike&& rhs)
+    {
+        std::swap(m_Strike_value,rhs.m_Strike_value);
     }
     
     void Strike::print_Strike() const
@@ -126,12 +214,34 @@ namespace model_params
     Volatility::Volatility(const double vol)
     : m_Volatility_value(vol)
     {
-        std::cout << "Use Constructor of Volatility" << std::endl;
+
     }
     
     Volatility::~Volatility()
     {
-        std::cout << "Use Destructor of Volatility" << std::endl;
+        m_Volatility_value = 0;
+    }
+    
+    Volatility::Volatility(const Volatility& rhs)
+    : m_Volatility_value(rhs.m_Volatility_value)
+    {
+        
+    }
+    
+    Volatility& Volatility::operator=(const Volatility& rhs)
+    {
+        m_Volatility_value = rhs.m_Volatility_value;
+    }
+    
+    Volatility::Volatility(Volatility&& rhs)
+    : m_Volatility_value(std::move(rhs.m_Volatility_value))
+    {
+        
+    }
+    
+    Volatility& Volatility::operator=(Volatility&& rhs)
+    {
+        std::swap(m_Volatility_value,rhs.m_Volatility_value);
     }
     
     void Volatility::print_Volatility() const
@@ -153,12 +263,34 @@ namespace model_params
     Maturity::Maturity(const double maturity)
     : m_Maturity_value(maturity)
     {
-        std::cout << "Use Constructor of Maturity" << std::endl;
+
     }
     
     Maturity::~Maturity()
     {
-        std::cout << "Use Destructor of Maturity" << std::endl;
+        m_Maturity_value = 0;
+    }
+    
+    Maturity::Maturity(const Maturity& rhs)
+    : m_Maturity_value(rhs.m_Maturity_value)
+    {
+        
+    }
+    
+    Maturity& Maturity::operator=(const Maturity& rhs)
+    {
+        m_Maturity_value = rhs.m_Maturity_value;
+    }
+    
+    Maturity::Maturity(Maturity&& rhs)
+    : m_Maturity_value(std::move(rhs.m_Maturity_value))
+    {
+        
+    }
+    
+    Maturity& Maturity::operator=(Maturity&& rhs)
+    {
+        std::swap(m_Maturity_value,rhs.m_Maturity_value);
     }
     
     void Maturity::print_Maturity() const

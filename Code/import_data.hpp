@@ -14,7 +14,7 @@
 
 namespace data_importation
 {
-    std::vector<double> get_data(std::string NameOfTheFile);
+    //std::vector<double> get_data(std::string NameOfTheFile);
 }
 
 #endif

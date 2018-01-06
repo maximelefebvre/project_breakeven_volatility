@@ -24,7 +24,8 @@ set(TYPES_SRCS
     main.cpp
     pricing_hedging.cpp
     parameters.cpp
-    functions.cpp)
+    functions.cpp
+    import_data.cpp)
 
 set(TYPES_TARGET breakeven_volatility)
 add_executable(${TYPES_TARGET} ${TYPES_SRCS})

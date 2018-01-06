@@ -21,10 +21,10 @@ namespace model_params
         void print_IR() const;
         double value() const;
     
-        //InterestRate(const InterestRate& rhs) = delete;
-        //InterestRate& operator=(const InterestRate& rhs) = delete;
-        //InterestRate(InterestRate&& rhs) = delete;
-        //InterestRate& operator=(InterestRate&& rhs) = delete;
+        InterestRate(const InterestRate& rhs);
+        InterestRate& operator=(const InterestRate& rhs);
+        InterestRate(InterestRate&& rhs);
+        InterestRate& operator=(InterestRate&& rhs);
     protected:
     private:
         double m_IR_value;
@@ -39,10 +39,10 @@ namespace model_params
         void print_DY() const;
         double value() const;
         
-        //DividendYield(const DividendYield& rhs) = delete;
-        //DividendYield& operator=(const DividendYield& rhs) = delete;
-        //DividendYield(DividendYield&& rhs) = delete;
-        //DividendYield& operator=(DividendYield&& rhs) = delete;
+        DividendYield(const DividendYield& rhs);
+        DividendYield& operator=(const DividendYield& rhs);
+        DividendYield(DividendYield&& rhs);
+        DividendYield& operator=(DividendYield&& rhs);
     protected:
     private:
         double m_DY_value;
@@ -57,10 +57,10 @@ namespace model_params
         void print_Spot() const;
         double value() const;
         
-        //Spot(const Spot& rhs) = delete;
-        //Spot& operator=(const Spot& rhs) = delete;
-        //Spot(Spot&& rhs) = delete;
-        //Spot& operator=(Spot&& rhs) = delete;
+        Spot(const Spot& rhs);
+        Spot& operator=(const Spot& rhs);
+        Spot(Spot&& rhs);
+        Spot& operator=(Spot&& rhs);
     protected:
     private:
         double m_Spot_value;
@@ -75,10 +75,10 @@ namespace model_params
         void print_Strike() const;
         double value() const;
         
-        //Strike(const Strike& rhs) = delete;
-        //Strike& operator=(const Strike& rhs) = delete;
-        //Strike(Strike&& rhs) = delete;
-        //Strike& operator=(Strike&& rhs) = delete;
+        Strike(const Strike& rhs);
+        Strike& operator=(const Strike& rhs);
+        Strike(Strike&& rhs);
+        Strike& operator=(Strike&& rhs);
     protected:
     private:
         double m_Strike_value;
@@ -93,10 +93,10 @@ namespace model_params
         void print_Volatility() const;
         double value() const;
         
-        //Volatility(const Volatility& rhs) = delete;
-        //Volatility& operator=(const Volatility& rhs) = delete;
-        //Volatility(Volatility&& rhs) = delete;
-        //Volatility& operator=(Volatility&& rhs) = delete;
+        Volatility(const Volatility& rhs);
+        Volatility& operator=(const Volatility& rhs);
+        Volatility(Volatility&& rhs);
+        Volatility& operator=(Volatility&& rhs);
     protected:
     private:
         double m_Volatility_value;
@@ -111,10 +111,10 @@ namespace model_params
         void print_Maturity() const;
         double value() const;
         
-        //Maturity(const Maturity& rhs) = delete;
-        //Maturity& operator=(const Maturity& rhs) = delete;
-        //Maturity(Maturity&& rhs) = delete;
-        //Maturity& operator=(Maturity&& rhs) = delete;
+        Maturity(const Maturity& rhs);
+        Maturity& operator=(const Maturity& rhs);
+        Maturity(Maturity&& rhs);
+        Maturity& operator=(Maturity&& rhs);
     protected:
     private:
         double m_Maturity_value;

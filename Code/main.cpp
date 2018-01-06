@@ -19,6 +19,7 @@
 double ValueOfPnL(const double volatility, const double strikeprice, const date StartDate, const date EndDate, const std::vector<double> Spots)
 {
     //std::size_t LengthVector = Spots.size();
+    int NbDays;
     NbDays = EndDate - StartDate;
     
     model_params::InterestRate ir(0.1);
@@ -49,11 +50,12 @@ double ValueOfPnL(const double volatility, const double strikeprice, const date 
     std::cout << "Delta: " << option.Delta() << std::endl;
     SpotPositions[0]=option.UnderlyingH();
     CashPositions[0]=option.Cash();
-    PnLVector[0]=0.0
+    PnLVector[0]=0.0;
     
     for(std::size_t i = 1;i<NbDays+1;++i)
     {
-        NbDaysLeft = EndDate - StartDate + i
+        int NbDaysLeft;
+        NbDaysLeft = EndDate - StartDate - i;
         /*model_params::Maturity mat2(double(NbDaysLeft)/365.0);
         model::EuropeanOption option2("Call", Spots[i], strike, ir, dy, vol, mat2);
         Prices[i] = option2.Price();
@@ -66,11 +68,11 @@ double ValueOfPnL(const double volatility, const double strikeprice, const date 
         Delta[i] = option.Delta();
         SpotPositions[i] = option.UnderlyingH();
         CashPositions[i] = option.Cash();
-        PnLVector[i] = (Prices[i] - Prices[i-1]) - Delta[i-1]*(Spots[i]-Spots[i-1]) - std::exp(ir.value() *maturity/LengthVector)*CashPositions[i-1];
-        if(i > 0)
+        PnLVector[i] = (Prices[i] - Prices[i-1]) - Delta[i-1]*(Spots[i]-Spots[i-1]) - std::exp(ir.value()/365.0)*CashPositions[i-1];
+        /*if(i > 0)
         {
             PnLVector[i] = (Prices[i] - Prices[i-1]) - Delta[i-1]*(Spots[i]-Spots[i-1]) - std::exp(ir.value() *maturity/LengthVector)*CashPositions[i-1];
-        }
+        }*/
     }
     double PnL = std::accumulate(PnLVector.begin(), PnLVector.end(), 0);
     return PnL;
@@ -81,9 +83,9 @@ double FindVolatility(const double strikeprice, const double maturity, const std
     double LowerBound = 0.;
     double UpperBound = 1000.;
     double temp = (LowerBound+UpperBound)/2;
-    while(std::abs(ValueOfPnL(temp/100,strikeprice,maturity,Spots)) > std::pow(10,-3))
+    while(std::abs(ValueOfPnL(temp/100.,strikeprice,maturity,Spots)) > std::pow(10,-3))
     {
-        if(ValueOfPnL(temp/100,strikeprice,maturity,Spots) >= 0)
+        if(ValueOfPnL(temp/100.,strikeprice,maturity,Spots) >= 0)
         {
             LowerBound = temp;
         }
@@ -122,10 +124,6 @@ void BreakEvenVolatility()
     }
     std::cout << ")" << std::endl;
 }
-
-
-
-
 
 int main(int argc, char* argv[])
 {

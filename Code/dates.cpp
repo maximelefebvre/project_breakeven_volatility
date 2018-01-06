@@ -2,12 +2,19 @@
 
 // DEFINING THE BASIC OPERATIONS //
 //// Construction //
-date:date(const int& dd, const int& mm, const int& yyyy)
+date::date(const int& dd, const int& mm, const int& yyyy)
 {
     day_ = dd
     month_ = mm
     year_ = yyyy // User must give year fully (4 digits)
 };
+
+date::~date()
+{
+    day_ = 0
+    month_ = 0
+    year_ = 0
+}
 
 //// Inline definitions ////
 date::date(){year_ = 0, month_ = 0, day_ = 0};
@@ -79,7 +86,7 @@ bool operator < (const date& d1, const date& d2)
     {
         if(d1.month()<d2.month()) return true;
         else if (d1.month()>d2.month()) return false;
-        else // both dates have the same month
+        else // both dates have the same year and month
         {
             if(d1.day()<d2.day()) return true;
             else return false;
@@ -92,7 +99,7 @@ bool operator < (const date& d1, const date& d2)
 bool operator <= (const date& d1, const date& d2)
 {
     if(!d1.valid()||!d2.valid()) return false;
-    if d1==d2 return true;
+    if (d1==d2) return true;
     return (d1<d2);
 }
 
@@ -167,4 +174,69 @@ ostream& operator << (ostream& os, const date& d)
         os << "Invalid date";
     };
     return os;
+}
+
+date operator + (const date& d, const int& days)
+{
+    if(!d.valid()) return date();
+    if (days <0) return d-(-days);
+    date temp=d
+    for (int i=1;i<=days;++i)
+    {
+        temp=next_date(temp);
+    };
+    return temp
+}
+
+date operator += (const date& d, const int& days)
+{
+    d=(d+days);
+    return d;
+}
+
+date operator - (const date& d, const int& days)
+{
+    if(!d.valid()) return date();
+    if (days <0) return d-(-days);
+    date temp=d
+    for (int i=1;i<=days;++i)
+    {
+        temp=previous_date(temp);
+    };
+    return temp
+}
+
+date operator -= (const date& d, const int& days)
+{
+    d=(d-days);
+    return d
+}
+
+int operator - (const date& d1, const date& d2)
+{
+    if(!d1.valid()) return d1;
+    if(!d2.valid()) return d2;
+    if (d1=d2) return 0;
+    else if d1>d2
+    {
+        date temp=d1;
+        int i=0
+        while (temp>d2)
+        {
+            ++i
+            temp=previous_date(temp)
+        }
+        return i
+    };
+    else
+    {
+        date temp=d1
+        int i=0
+        while (temp<d2)
+        {
+            --i
+            temp=next_date(temp)
+        }
+        return i
+    };
 }

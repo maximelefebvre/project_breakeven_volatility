@@ -9,6 +9,7 @@ class date
 public:
     date();
     date(const int& d, const int& mm, const int& yyyy);
+    virtual ~date();
     
     bool valid(void) const;
     
@@ -38,6 +39,13 @@ bool operator < (const date&, const date&);
 bool operator > (const date&, const date&);
 bool operator <=(const date&, const date&);
 bool operator >=(const date&, const date&);
+
+// Calculation operators
+date operator + (const date&, const int&); //int will be a number of days
+date operator += (const date&, const int&);
+date operator - (const date&, const int&);
+date operator -= (const date&, const int&);
+int operator - (const date&, const date&); // number of days between dates
 
 ostream& operator << (ostream& os, const date& d); //output operator
 

@@ -11,6 +11,7 @@
 #include <vector>
 
 #include "functions.hpp"
+#include "parameters.hpp"
 
 namespace model
 {
@@ -18,6 +19,11 @@ namespace model
     : m_TypeOption(typeoption), m_Spot(spot), m_Strike(strike), m_IR(ir), m_DY(dy), m_Volatility(volatility), m_Maturity(maturity)
     {
         std::cout << "Construction of European Option" << std::endl;
+    }
+    
+    EuropeanOption::~EuropeanOption()
+    {
+        
     }
     
     

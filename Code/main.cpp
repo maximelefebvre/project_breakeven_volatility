@@ -131,55 +131,6 @@ int main(int argc, char* argv[])
 {
     std::string name("SPX500.csv");
     data_importation::data_t Prices = data_importation::get_data(name);
-    std::ifstream infile(name);
-    //std::string str;
-    //infile >> str;
-    //std::cout << str << std::endl;
     
-    
-    
-    /*std::vector<double> Spots(5,0.0);
-    Spots[0] = 2500.0;
-    Spots[1] = 2450.0;
-    Spots[2] = 2550.0;
-    Spots[3] = 2300.0;
-    Spots[4] = 2400.0;
-
-    std::size_t LengthVector = Spots.size();
-    
-    model_params::InterestRate ir(0.1);
-    model_params::DividendYield dy(0.02);
-    model_params::Spot spot(2000.0);
-    model_params::Strike strike(2400.0);
-    model_params::Volatility vol(4.);
-    model_params::Maturity mat(1.);
-    
-    model::EuropeanOption option("Call", spot, strike, ir, dy, vol, mat);
-    std::cout << "Price: " << option.Price() << std::endl;
-    std::cout << "Delta: " << option.Delta() << std::endl;
-    
-    std::vector<double> Prices(LengthVector,0.0);
-    std::vector<double> Delta(LengthVector,0.0);
-    std::vector<double> SpotPositions(LengthVector,0.0);
-    std::vector<double> CashPositions(LengthVector,0.0);
-    std::vector<double> PnLVector(LengthVector,0.0);
-    
-    for(std::size_t i = 0;i<LengthVector;++i)
-    {
-        model_params::Maturity mat2(1.0-i/LengthVector);
-        model::EuropeanOption option2("Call", Spots[i], strike, ir, dy, vol, mat2);
-        Prices[i] = option2.Price();
-        Delta[i] = option2.Delta();
-        SpotPositions[i] = option2.UnderlyingH();
-        CashPositions[i] = option2.Cash();
-        
-        if(i > 0)
-        {
-            PnLVector[i] = (Prices[i] - Prices[i-1]) - Delta[i-1]*(Spots[i]-Spots[i-1]) - std::exp(ir.value() *1/LengthVector)*CashPositions[i-1];
-        }
-    }
-    double PnL = std::accumulate(PnLVector.begin(), PnLVector.end(), 0);
-    
-    std::cout << PnL << std::endl;*/
     return 0;
 }

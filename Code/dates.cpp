@@ -109,3 +109,62 @@ bool operator >= (const date& d1, const date& d2)
 }
 
 // ITERATIONS //
+inline date next_date(const date& d)
+{
+    date ndat;
+    if(!d.valid()) return ndat; // return 0
+    ndat=date((d.day()+1), d.month(), d.year()); if (ndat.valid()) return ndat;
+    ndat=date(1, (d.month()+1), d.year()); if (ndat.valid()) return ndat;
+    ndat=date(1,1,(d.year()+1)); return ndat;
+}
+
+inline date previous_date(const date& d)
+{
+    date ndat;
+    if(!d.valid()) return ndat;
+    ndat=date((d.day()-1), d.month(), d.year()); if (ndat.valid()) return ndat;
+    ndat=date(31, (d.month()-1), d.year()); if (ndat.valid()) return ndat;
+    ndat=date(30, (d.month()-1), d.year()); if (ndat.valid()) return ndat;
+    ndat=date(29, (d.month()-1), d.year()); if (ndat.valid()) return ndat;
+    ndat=date(28, (d.month()-1), d.year()); if (ndat.valid()) return ndat;
+    ndat=date(31,12,(d.year()-1)); return ndat;
+}
+
+date date::operator ++(int) // postfix incrementation operator
+{
+    date d = *this
+    *this = next_date(*this)
+    return d;
+}
+
+date date::operator ++() // prefix operator
+{
+    *this = next_date(*this)
+    return *this;
+}
+
+date date::operator --(int) // postfix decrementation operator
+{
+    date d = *this
+    *this = previous_date(*this)
+    return d;
+}
+
+date date::operator --() // prefix decrementation operator
+{
+    *this = previous_date(*this)
+    return *this;
+}
+
+ostream& operator << (ostream& os, const date& d)
+{
+    if(d.valid())
+    {
+        os<< d.day() << "/" << d.month() << "/" << d.year();
+    }
+    else
+    {
+        os << "Invalid date";
+    };
+    return os;
+}

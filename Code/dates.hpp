@@ -20,10 +20,10 @@ public:
     void set_month(const int& month );
     void set_year(const int& year);
     
-    date operator ++();
-    date operator ++(int);
-    date operator --();
-    date operator --(int);
+    date operator ++(); // prefix operator
+    date operator ++(int); // postfix operator
+    date operator --(); // prefix operator
+    date operator --(int); // postfix operator
     
 protected:
     int year_;
@@ -39,6 +39,6 @@ bool operator > (const date&, const date&);
 bool operator <=(const date&, const date&);
 bool operator >=(const date&, const date&);
 
-ostream& operator << ( ostream& os, const date& d); //output operator
+ostream& operator << (ostream& os, const date& d); //output operator
 
 #endif

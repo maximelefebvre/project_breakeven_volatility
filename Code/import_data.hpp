@@ -14,7 +14,9 @@
 
 namespace data_importation
 {
-    //std::vector<double> get_data(std::string NameOfTheFile);
+    std::istream& operator >> ( std::istream& ins, record_t& record );
+    std::istream& operator >> ( std::istream& ins, data_t& data );
+    std::vector<double> get_data(std::string NameOfTheFile);
 }
 
 #endif

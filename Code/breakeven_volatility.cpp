@@ -21,7 +21,8 @@ namespace BEV
     double ValueOfPnL(const model_params::Volatility vol, const model_params::Strike strikeprice, const date StartDate, const date EndDate, const std::vector<double> Spots, const model_params::InterestRate ir, const model_params::DividendYield dy)
     {
         std::size_t NbDays = Spots.size();
-        //NbDays = EndDate - StartDate;
+        /*int k = EndDate - StartDate;
+         std::size_t NbDays = size_t(k);*/
         
         model_params::Spot spot(Spots[0]);
         model_params::Maturity mat(double(NbDays)/365.0);
@@ -68,7 +69,7 @@ namespace BEV
     model_params::Volatility FindVolatility(const model_params::Strike strikeprice, const date StartDate, const date EndDate, const std::vector<double> Spots, const model_params::InterestRate ir, const model_params::DividendYield dy)
     {
         double LowerBound = 0.;
-        double UpperBound = 20.;
+        double UpperBound = 0.6;
         model_params::Volatility vol((LowerBound+UpperBound)/2);
         //std::cout << ValueOfPnL(vol,strikeprice,StartDate, EndDate, Spots, ir, dy) << std::endl;
         while(std::abs(ValueOfPnL(vol,strikeprice,StartDate, EndDate, Spots,ir,dy)) > std::pow(10,-1))

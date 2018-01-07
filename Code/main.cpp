@@ -37,9 +37,9 @@ int main(int argc, char* argv[])
     std::vector<double> Strikes({2000.0,2200.0,2400.0});
     
     // If you have a powerful computer, try this vector of strikes:
-    //double initialstrike = 1500.;
-    //std::vector<double> Strikes(2000);
-    //std::iota(Strikes.begin(),Strikes.end(),initialstrike);
+    /*double initialstrike = 1500.;
+    std::vector<double> Strikes(2000);
+    std::iota(Strikes.begin(),Strikes.end(),initialstrike);*/
     std::cout << "Strikes vector : (";
     for (std::vector<double>::const_iterator i = Strikes.begin(); i != Strikes.end(); ++i)
     {

@@ -20,6 +20,7 @@ namespace data_importation
     std::istream& operator >> ( std::istream& ins, record_t& record );
     std::istream& operator >> ( std::istream& ins, data_t& data );
     data_t get_data(std::string NameOfTheFile);
+    std::vector<double> transform_datastructure(const data_t data, const std::size_t col);
 }
 
 #endif

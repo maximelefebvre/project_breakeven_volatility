@@ -28,10 +28,10 @@ namespace data_importation
         // now we'll use a stringstream to separate the fields out of the line
         std::stringstream ss(line);
         std::string field;
-        while (getline( ss, field,','))
+        while (getline(ss,field,','))
         {
             // for each field we wish to convert it to a double
-            std::stringstream fs( field );
+            std::stringstream fs(field);
             double f = 0.0;  // (default value is 0.0)
             fs >> f;
             
@@ -90,6 +90,16 @@ namespace data_importation
         std::cout << "The largest record has " << max_record_size << " fields.\n";
         
         return data;
+    }
+    
+    std::vector<double> transform_datastructure(const data_t data, const std::size_t col)
+    {
+        std::vector<double> vec;
+        for(std::size_t i=0;i<data.size();++i)
+        {
+            vec.push_back(data[i][col]);
+        }
+        return vec;
     }
 
 }

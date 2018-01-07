@@ -18,7 +18,7 @@ namespace model
     EuropeanOption::EuropeanOption(const std::string typeoption, const model_params::Spot spot, const model_params::Strike strike, const model_params::InterestRate ir, const model_params::DividendYield dy, const model_params::Volatility volatility, const model_params::Maturity maturity)
     : m_TypeOption(typeoption), m_Spot(spot), m_Strike(strike), m_IR(ir), m_DY(dy), m_Volatility(volatility), m_Maturity(maturity)
     {
-        std::cout << "Construction of European Option" << std::endl;
+
     }
     
     EuropeanOption::~EuropeanOption()

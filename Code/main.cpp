@@ -19,21 +19,28 @@
 
 int main(int argc, char* argv[])
 {
-    std::string name("SPX500.csv");
+    std::string name("../SPX500-python_transformed.csv");
     data_importation::data_t Prices = data_importation::get_data(name);
-    std::cout << Prices[8][100] << std::endl;
-    
-    std::vector<double> Spots(5,0.0);
-    Spots[0] = 2500.0;
-    Spots[1] = 2450.0;
-    Spots[2] = 2550.0;
-    Spots[3] = 2300.0;
-    Spots[4] = 2400.0;
+    std::size_t column_to_keep = 4;
+    std::vector<double> Spots = data_importation::transform_datastructure(Prices,column_to_keep);
+    std::cout << "Spots vector : (";
+    for (std::vector<double>::const_iterator i = Spots.begin(); i != Spots.end(); ++i)
+    {
+        std::cout << *i << ',';
+    }
+    std::cout << ")" << std::endl;
+
     
     //Declare a vector of Strikes
     double initialstrike = 1500.;
     std::vector<double> Strikes(2000);
     std::iota(Strikes.begin(),Strikes.end(),initialstrike);
+    std::cout << "Strikes vector : (";
+    for (std::vector<double>::const_iterator i = Strikes.begin(); i != Strikes.end(); ++i)
+    {
+        std::cout << *i << ',';
+    }
+    std::cout << ")" << std::endl;
     
     //Declare Interest Rate and Dividend Yield
     model_params::InterestRate ir(0.1);

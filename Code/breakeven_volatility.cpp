@@ -35,8 +35,6 @@ namespace BEV
         model::EuropeanOption option("Call", spot, strikeprice, ir, dy, vol, mat);
         Prices[0] = option.Price();
         Delta[0] = option.Delta();
-        std::cout << "Price: " << option.Price() << std::endl;
-        std::cout << "Delta: " << option.Delta() << std::endl;
         SpotPositions[0]=option.UnderlyingH();
         CashPositions[0]=option.Cash();
         PnLVector[0]=0.0;
@@ -64,7 +62,7 @@ namespace BEV
         model_params::Volatility vol((LowerBound+UpperBound)/2);
         while(std::abs(ValueOfPnL(vol,strikeprice,StartDate, EndDate, Spots,ir,dy)) > std::pow(10,-3))
         {
-            if(ValueOfPnL(vol,strikeprice,StartDate, EndDate, Spots, ir, dy) >= 0)
+            if(ValueOfPnL(vol,strikeprice,StartDate, EndDate, Spots, ir, dy) > 0)
             {
                 LowerBound = vol.value();
             }
@@ -79,14 +77,14 @@ namespace BEV
     
     std::vector<model_params::Volatility> BreakEvenVolatility(const std::vector<double> Spots, const std::vector<double> Strikes, const model_params::InterestRate ir, const model_params::DividendYield dy)
     {
-        std::vector<model_params::Volatility> VolatilitySmile(Strikes.size(),0.);
+        model_params::Volatility vol(0.0); // initial value for the vector
+        std::vector<model_params::Volatility> VolatilitySmile;
         
         for(std::size_t i = 0;i<Strikes.size();++i)
         {
             model_params::Strike strike(Strikes[i]);
-            model_params::Volatility vol = FindVolatility(strike,date(2016,06,30),date(2017,06,30),Spots,ir,dy);
-            std::cout << vol.value() << std::endl;
-            VolatilitySmile[i] = vol;
+            model_params::Volatility vol = FindVolatility(strike,date(2016,06,30),date(2017,06,29),Spots,ir,dy);
+            VolatilitySmile.push_back(vol);
         }
         
         std::cout << "Volatility Smile : (";

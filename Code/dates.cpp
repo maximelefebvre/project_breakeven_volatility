@@ -212,8 +212,11 @@ date operator -= (const date& d, const int& days)
 
 int operator - (const date& d1, const date& d2)
 {
-    if(!d1.valid()||!d2.valid()) return 0;
-    cout << "Invalid date /n";
+    if(!d1.valid()||!d2.valid())
+    {
+        return 0;
+        std::cout << "Invalid date!" << endl;
+    }
     if (d1==d2) return 0;
     else if (d1>d2)
     {

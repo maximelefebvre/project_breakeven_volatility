@@ -26,7 +26,8 @@ set(TYPES_SRCS
     parameters.cpp
     functions.cpp
     import_data.cpp
-    dates.cpp)
+    dates.cpp
+    breakeven_volatility.cpp)
 
 set(TYPES_TARGET breakeven_volatility)
 add_executable(${TYPES_TARGET} ${TYPES_SRCS})

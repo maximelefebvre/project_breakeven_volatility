@@ -18,7 +18,7 @@ namespace model
     class EuropeanOption
     {
     public:
-        EuropeanOption(std::string typeoption, model_params::Spot spot, model_params::Strike strike, model_params::InterestRate ir, model_params::DividendYield dy, model_params::Volatility volatility, model_params::Maturity maturity);
+        EuropeanOption(const std::string typeoption, const model_params::Spot spot, const model_params::Strike strike, const model_params::InterestRate ir, const model_params::DividendYield dy, const model_params::Volatility volatility, const model_params::Maturity maturity);
         ~EuropeanOption();
         EuropeanOption(const EuropeanOption& rhs);
         EuropeanOption& operator=(const EuropeanOption& rhs);

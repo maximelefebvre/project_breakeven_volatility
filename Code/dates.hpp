@@ -11,6 +11,11 @@ public:
     date(const int& d, const int& mm, const int& yyyy);
     virtual ~date();
     
+    date(const date& rhs);
+    date& operator=(const date& rhs);
+    date(date&& rhs);
+    date& operator=(date&& rhs);
+    
     bool valid(void) const;
     
     int day() const;

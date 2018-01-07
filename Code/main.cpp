@@ -14,92 +14,15 @@
 #include "parameters.hpp"
 #include "pricing_hedging.hpp"
 #include "dates.hpp"
+#include "breakeven_volatility.hpp"
 
-//double ValueOfPnL(const double volatility, const double strikeprice, const double maturity, const std::vector<double> Spots)
-double ValueOfPnL(const double volatility, const double strikeprice, const date StartDate, const date EndDate, const std::vector<double> Spots)
-{
-    //std::size_t LengthVector = Spots.size();
-    int NbDays;
-    NbDays = EndDate - StartDate;
-    
-    model_params::InterestRate ir(0.1);
-    model_params::DividendYield dy(0.02);
-    //model_params::Spot spot(100.0);
-    model_params::Spot spot(Spots[0]);
-    model_params::Strike strike(strikeprice);
-    model_params::Volatility vol(volatility);
-    //model_params::Maturity mat(maturity);
-    model_params::Maturity mat(double(NbDays)/365.0);
-    
-    /*std::vector<double> Prices(LengthVector,0.0);
-    std::vector<double> Delta(LengthVector,0.0);
-    std::vector<double> SpotPositions(LengthVector,0.0);
-    std::vector<double> CashPositions(LengthVector,0.0);
-    std::vector<double> PnLVector(LengthVector,0.0);*/
-    
-    std::vector<double> Prices(NbDays+1,0.0);
-    std::vector<double> Delta(NbDays+1,0.0);
-    std::vector<double> SpotPositions(NbDays+1,0.0);
-    std::vector<double> CashPositions(NbDays+1,0.0);
-    std::vector<double> PnLVector(NbDays+1,0.0);
-    
-    model::EuropeanOption option("Call", spot, strike, ir, dy, vol, mat);
-    Prices[0] = option.Price();
-    Delta[0] = option.Delta();
-    std::cout << "Price: " << option.Price() << std::endl;
-    std::cout << "Delta: " << option.Delta() << std::endl;
-    SpotPositions[0]=option.UnderlyingH();
-    CashPositions[0]=option.Cash();
-    PnLVector[0]=0.0;
-    
-    for(std::size_t i = 1;i<NbDays+1;++i)
-    {
-        int NbDaysLeft;
-        NbDaysLeft = EndDate - StartDate - i;
-        /*model_params::Maturity mat2(double(NbDaysLeft)/365.0);
-        model::EuropeanOption option2("Call", Spots[i], strike, ir, dy, vol, mat2);
-        Prices[i] = option2.Price();
-        Delta[i] = option2.Delta();
-        SpotPositions[i] = option2.UnderlyingH();
-        CashPositions[i] = option2.Cash();*/
-        model_params::Maturity mat(double(NbDaysLeft)/365.0);
-        model::EuropeanOption option("Call", Spots[i], strike, ir, dy, vol, mat);
-        Prices[i] = option.Price();
-        Delta[i] = option.Delta();
-        SpotPositions[i] = option.UnderlyingH();
-        CashPositions[i] = option.Cash();
-        PnLVector[i] = (Prices[i] - Prices[i-1]) - Delta[i-1]*(Spots[i]-Spots[i-1]) - std::exp(ir.value()/365.0)*CashPositions[i-1];
-        /*if(i > 0)
-        {
-            PnLVector[i] = (Prices[i] - Prices[i-1]) - Delta[i-1]*(Spots[i]-Spots[i-1]) - std::exp(ir.value() *maturity/LengthVector)*CashPositions[i-1];
-        }*/
-    }
-    double PnL = std::accumulate(PnLVector.begin(), PnLVector.end(), 0);
-    return PnL;
-}
 
-double FindVolatility(const double strikeprice, const date StartDate, const date EndDate, const std::vector<double> Spots)
+int main(int argc, char* argv[])
 {
-    double LowerBound = 0.;
-    double UpperBound = 1000.;
-    double temp = (LowerBound+UpperBound)/2;
-    while(std::abs(ValueOfPnL(temp/100.,strikeprice,StartDate, EndDate, Spots)) > std::pow(10,-3))
-    {
-        if(ValueOfPnL(temp/100.,strikeprice,StartDate, EndDate, Spots) >= 0)
-        {
-            LowerBound = temp;
-        }
-        else
-        {
-            UpperBound = temp;
-        }
-        temp = (LowerBound+UpperBound)/2;
-    }
-    return temp;
-}
-
-void BreakEvenVolatility()
-{
+    std::string name("SPX500.csv");
+    data_importation::data_t Prices = data_importation::get_data(name);
+    std::cout << Prices[8][100] << std::endl;
+    
     std::vector<double> Spots(5,0.0);
     Spots[0] = 2500.0;
     Spots[1] = 2450.0;
@@ -107,28 +30,16 @@ void BreakEvenVolatility()
     Spots[3] = 2300.0;
     Spots[4] = 2400.0;
     
-    std::vector<double> Strikes({2000.0,2100.0,2200.0,2300.0,2400.0,2500.0});
-    std::vector<double> VolatilitySmile(Strikes.size(),0.);
+    //Declare a vector of Strikes
+    double initialstrike = 1500.;
+    std::vector<double> Strikes(2000);
+    std::iota(Strikes.begin(),Strikes.end(),initialstrike);
     
-    for(std::size_t i = 0;i<Strikes.size();++i)
-    {
-        double vol = FindVolatility(Strikes[i],date(2016,06,30),date(2017,06,30),Spots);
-        std::cout << vol << std::endl;
-        VolatilitySmile[i] = vol;
-    }
+    //Declare Interest Rate and Dividend Yield
+    model_params::InterestRate ir(0.1);
+    model_params::DividendYield dy(0.02);
     
-    std::cout << "Volatility Smile : (";
-    for(std::size_t i = 0;i<Strikes.size();++i)
-    {
-        std::cout << VolatilitySmile[i] << ",";
-    }
-    std::cout << ")" << std::endl;
-}
-
-int main(int argc, char* argv[])
-{
-    std::string name("SPX500.csv");
-    data_importation::data_t Prices = data_importation::get_data(name);
-    
+    //Compute Volatility Smile
+    std::vector<model_params::Volatility> VolatilitySmile = BEV::BreakEvenVolatility(Spots, Strikes, ir,dy);
     return 0;
 }

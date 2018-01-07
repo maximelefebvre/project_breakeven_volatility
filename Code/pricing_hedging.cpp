@@ -15,7 +15,7 @@
 
 namespace model
 {
-    EuropeanOption::EuropeanOption(std::string typeoption, model_params::Spot spot, model_params::Strike strike, model_params::InterestRate ir, model_params::DividendYield dy, model_params::Volatility volatility, model_params::Maturity maturity)
+    EuropeanOption::EuropeanOption(const std::string typeoption, const model_params::Spot spot, const model_params::Strike strike, const model_params::InterestRate ir, const model_params::DividendYield dy, const model_params::Volatility volatility, const model_params::Maturity maturity)
     : m_TypeOption(typeoption), m_Spot(spot), m_Strike(strike), m_IR(ir), m_DY(dy), m_Volatility(volatility), m_Maturity(maturity)
     {
         std::cout << "Construction of European Option" << std::endl;
@@ -26,13 +26,13 @@ namespace model
         
     }
     
-    EuropeanOption(const EuropeanOption& rhs)
+    EuropeanOption::EuropeanOption(const EuropeanOption& rhs)
     : m_TypeOption(rhs.m_TypeOption), m_Spot(rhs.m_Spot), m_Strike(rhs.m_Strike), m_IR(rhs.m_IR), m_DY(rhs.m_DY), m_Volatility(rhs.m_Volatility), m_Maturity(rhs.m_Maturity)
     {
         
     }
     
-    EuropeanOption& operator=(const EuropeanOption& rhs)
+    EuropeanOption& EuropeanOption::operator=(const EuropeanOption& rhs)
     {
         m_TypeOption = rhs.m_TypeOption;
         m_Spot = rhs.m_Spot;
@@ -43,13 +43,13 @@ namespace model
         m_Maturity = rhs.m_Maturity;
     }
     
-    EuropeanOption(EuropeanOption&& rhs)
+    EuropeanOption::EuropeanOption(EuropeanOption&& rhs)
     : m_TypeOption(std::move(rhs.m_TypeOption)), m_Spot(std::move(rhs.m_Spot)), m_Strike(std::move(rhs.m_Strike)), m_IR(std::move(rhs.m_IR)), m_DY(std::move(rhs.m_DY)), m_Volatility(std::move(rhs.m_Volatility)), m_Maturity(std::move(rhs.m_Maturity))
     {
         
     }
     
-    EuropeanOption& operator=(EuropeanOption&& rhs)
+    EuropeanOption& EuropeanOption::operator=(EuropeanOption&& rhs)
     {
         std::swap(m_TypeOption,rhs.m_TypeOption);
         std::swap(m_Spot,rhs.m_Spot);
@@ -72,7 +72,10 @@ namespace model
             z = -1.0;
         }
         
-        if m_Maturity = 0.0 return std::max(z*(m_Spot.value()-m_Strike.value()),0.0)
+        if(m_Maturity.value() == 0.0)
+        {
+            return std::max(z*(m_Spot.value()-m_Strike.value()),0.0);
+        }
         
         double d1 = (std::log(m_Spot.value()/m_Strike.value()) + (m_IR.value() - m_DY.value() + 0.5*m_Volatility.value() * m_Volatility.value())*m_Maturity.value()) / (m_Volatility.value() * std::sqrt(m_Maturity.value()));
         double d2 = d1 - m_Volatility.value() * std::sqrt(m_Maturity.value());
@@ -92,10 +95,16 @@ namespace model
             z = -1.0;
         }
         
-        if m_Maturity = 0.0
+        if(m_Maturity.value() == 0.0)
         {
-            if std::max(z*(m_Spot.value()-m_Strike.value()),0.0) = 0 return 0;
-            else return z
+            if(std::max(z*(m_Spot.value()-m_Strike.value()),0.0) == 0)
+            {
+                return 0;
+            }
+            else
+            {
+                return z;
+            }
         }
         
         double d1 = (std::log(m_Spot.value()/m_Strike.value()) + (m_IR.value() - m_DY.value() + 0.5*m_Volatility.value()*m_Volatility.value())*m_Maturity.value()) / (m_Volatility.value() * std::sqrt(m_Maturity.value()));

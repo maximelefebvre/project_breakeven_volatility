@@ -16,6 +16,32 @@ date::~date()
     year_ = 0;
 }
 
+date::date(const date& rhs)
+: year_(rhs.year_), month_(rhs.month_), day_(rhs.day_)
+{
+    
+}
+
+date& date::operator=(const date& rhs)
+{
+    year_ = rhs.year_;
+    month_ = rhs.month_;
+    day_ = rhs.day_;
+}
+
+date::date(date&& rhs)
+: year_(std::move(rhs.year_)), month_(std::move(rhs.month_)), day_(std::move(rhs.day_))
+{
+    
+}
+
+date& date::operator=(date&& rhs)
+{
+    std::swap(year_,rhs.year_);
+    std::swap(month_,rhs.month_);
+    std::swap(day_,rhs.day_);
+}
+
 //// Inline definitions ////
 date::date(){year_ = 0; month_ = 0; day_ = 0;};
 

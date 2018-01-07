@@ -123,6 +123,33 @@ breakeven_volatility/fast:
 	$(MAKE) -f CMakeFiles/breakeven_volatility.dir/build.make CMakeFiles/breakeven_volatility.dir/build
 .PHONY : breakeven_volatility/fast
 
+breakeven_volatility.o: breakeven_volatility.cpp.o
+
+.PHONY : breakeven_volatility.o
+
+# target to build an object file
+breakeven_volatility.cpp.o:
+	$(MAKE) -f CMakeFiles/breakeven_volatility.dir/build.make CMakeFiles/breakeven_volatility.dir/breakeven_volatility.cpp.o
+.PHONY : breakeven_volatility.cpp.o
+
+breakeven_volatility.i: breakeven_volatility.cpp.i
+
+.PHONY : breakeven_volatility.i
+
+# target to preprocess a source file
+breakeven_volatility.cpp.i:
+	$(MAKE) -f CMakeFiles/breakeven_volatility.dir/build.make CMakeFiles/breakeven_volatility.dir/breakeven_volatility.cpp.i
+.PHONY : breakeven_volatility.cpp.i
+
+breakeven_volatility.s: breakeven_volatility.cpp.s
+
+.PHONY : breakeven_volatility.s
+
+# target to generate assembly for a file
+breakeven_volatility.cpp.s:
+	$(MAKE) -f CMakeFiles/breakeven_volatility.dir/build.make CMakeFiles/breakeven_volatility.dir/breakeven_volatility.cpp.s
+.PHONY : breakeven_volatility.cpp.s
+
 dates.o: dates.cpp.o
 
 .PHONY : dates.o
@@ -294,6 +321,9 @@ help:
 	@echo "... rebuild_cache"
 	@echo "... edit_cache"
 	@echo "... breakeven_volatility"
+	@echo "... breakeven_volatility.o"
+	@echo "... breakeven_volatility.i"
+	@echo "... breakeven_volatility.s"
 	@echo "... dates.o"
 	@echo "... dates.i"
 	@echo "... dates.s"

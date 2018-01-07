@@ -16,9 +16,6 @@ namespace data_importation
     typedef std::vector <double> record_t;
     typedef std::vector <record_t> data_t;
     
-    //-----------------------------------------------------------------------------
-    // Let's overload the stream input operator to read a list of CSV fields (which a CSV record).
-    // Remember, a record is a list of doubles separated by commas ','.
     std::istream& operator >> ( std::istream& ins, record_t& record )
     {
         // make sure that the returned record contains only the stuff we read now
@@ -26,21 +23,20 @@ namespace data_importation
         
         // read the entire line into a string (a CSV record is terminated by a newline)
         std::string line;
-        getline( ins, line );
+        getline(ins,line);
         
         // now we'll use a stringstream to separate the fields out of the line
-        std::stringstream ss( line );
+        std::stringstream ss(line);
         std::string field;
-        while (getline( ss, field, ',' ))
+        while (getline( ss, field,','))
         {
             // for each field we wish to convert it to a double
-            // (since we require that the CSV contains nothing but floating-point values)
             std::stringstream fs( field );
             double f = 0.0;  // (default value is 0.0)
             fs >> f;
             
             // add the newly-converted field to the end of the record
-            record.push_back( f );
+            record.push_back(f);
         }
         
         // Now we have read a single line, converted into a list of fields, converted the fields
@@ -49,10 +45,6 @@ namespace data_importation
         return ins;
     }
     
-    //-----------------------------------------------------------------------------
-    // Let's likewise overload the stream input operator to read a list of CSV records.
-    // This time it is a little easier, just because we only need to worry about reading
-    // records, and not fields.
     std::istream& operator >> ( std::istream& ins, data_t& data )
     {
         // make sure that the returned data only contains the CSV data we read here
@@ -62,7 +54,7 @@ namespace data_importation
         record_t record;
         while (ins >> record)
         {
-            data.push_back( record );
+            data.push_back(record);
         }
         
         // Again, return the argument stream as required for this kind of input stream overload.
@@ -75,7 +67,7 @@ namespace data_importation
         data_t data;
         
         // Here is the file containing the data. Read it into data.
-        std::ifstream infile( NameOfTheFile );
+        std::ifstream infile(NameOfTheFile);
         infile >> data;
         
         // Complain if something went wrong.
@@ -96,10 +88,6 @@ namespace data_importation
                 max_record_size = data[i].size();
             }
         std::cout << "The largest record has " << max_record_size << " fields.\n";
-        
-        std::cout << "The second field in the fourth record contains the value " << data[ 3 ][ 1 ] << ".\n";
-        
-        std::cout << "Good bye!\n";
         
         return data;
     }

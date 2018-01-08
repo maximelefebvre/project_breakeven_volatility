@@ -50,8 +50,9 @@ int main(int argc, char* argv[])
     //Declare Interest Rate and Dividend Yield
     model_params::InterestRate ir(0.1);
     model_params::DividendYield dy(0.02);
+    std::string TypeOption = "Call";
     
     //Compute Volatility Smile
-    std::vector<model_params::Volatility> VolatilitySmile = BEV::BreakEvenVolatility(Spots, Strikes, ir,dy);
+    std::vector<model_params::Volatility> VolatilitySmile = BEV::BreakEvenVolatility(Spots, Strikes, ir,dy,TypeOption);
     return 0;
 }

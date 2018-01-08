@@ -22,6 +22,10 @@ As it has been said before, we want the volatility that cancels the PnL. That is
 
 This method allows us to get a **Volatility Smile** for different Strike prices over a period of one year.
 
+## P&L by Black-Scholes Robustness Formula
+
+We also provide a function for computing **Nicole El Karoui's Black-Scholes Robustness Formula**.
+
 ## Potential enhancements
 
 We integrated a class for managing the dates as objects, as it has been done with the library datetime in Python for example.

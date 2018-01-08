@@ -125,5 +125,16 @@ namespace model
         return Price() - UnderlyingH();
     }
     
+    double EuropeanOption::Gamma()
+    {
+        double d1 = (std::log(m_Spot.value()/m_Strike.value()) + (m_IR.value() - m_DY.value() + 0.5*m_Volatility.value()*m_Volatility.value())*m_Maturity.value()) / (m_Volatility.value() * std::sqrt(m_Maturity.value()));
+        return func::Gaussian_Distrib_PDF(d1);
+    }
+    
+    double EuropeanOption::GammaCash()
+    {
+        return Gamma() * m_Spot.value() * m_Spot.value();
+    }
+    
     
 }

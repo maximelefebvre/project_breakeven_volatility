@@ -51,8 +51,9 @@ int main(int argc, char* argv[])
     model_params::InterestRate ir(0.1);
     model_params::DividendYield dy(0.02);
     std::string TypeOption = "Call";
+    std::string method = "BlackScholesRobustnessFormula"; // Other one is "Basic"
     
     //Compute Volatility Smile
-    std::vector<model_params::Volatility> VolatilitySmile = BEV::BreakEvenVolatility(Spots, Strikes, ir,dy,TypeOption);
+    std::vector<model_params::Volatility> VolatilitySmile = BEV::BreakEvenVolatility(Spots, Strikes, ir,dy,TypeOption,method);
     return 0;
 }

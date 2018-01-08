@@ -29,6 +29,8 @@ namespace model
         double Delta();
         double UnderlyingH();
         double Cash();
+        double Gamma();
+        double GammaCash();
     protected:
     private:
         std::string m_TypeOption;

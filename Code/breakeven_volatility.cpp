@@ -18,7 +18,7 @@
 
 namespace BEV
 {
-    const double ValueOfPnL(const model_params::Volatility vol, const model_params::Strike strikeprice, const date StartDate, const date EndDate, const std::vector<double> Spots, const model_params::InterestRate ir, const model_params::DividendYield dy, const std::string TypeOption)
+    const double ValueOfPnL(const model_params::Volatility vol, const model_params::Strike strikeprice, const std::date StartDate, const std::date EndDate, const std::vector<double> Spots, const model_params::InterestRate ir, const model_params::DividendYield dy, const std::string TypeOption)
     {
         std::size_t NbDays = Spots.size();
         /*int k = EndDate - StartDate;
@@ -66,18 +66,18 @@ namespace BEV
             PnLVector.push_back(-1.*std::max(strikeprice.value()-Spots[Spots.size()-1],0.));
         }
         /*std::cout << "Pnl vector : (";
-        for (std::vector<double>::const_iterator i = PnLVector.begin(); i != PnLVector.end(); ++i)
-        {
-            std::cout << *i << ',';
-        }
-        std::cout << ")" << std::endl << std::endl;*/
+         for (std::vector<double>::const_iterator i = PnLVector.begin(); i != PnLVector.end(); ++i)
+         {
+         std::cout << *i << ',';
+         }
+         std::cout << ")" << std::endl << std::endl;*/
         
         double PnL = std::accumulate(PnLVector.begin(), PnLVector.end(), 0);
         //std::cout << PnL << std::endl;
         return PnL;
     }
     
-    const double ValueOfPnL_BlackScholesRobustnessFormula(const model_params::Volatility vol, const model_params::Strike strikeprice, const date StartDate, const date EndDate, const std::vector<double> Spots, const model_params::InterestRate ir, const model_params::DividendYield dy, const std::string TypeOption)
+    const double ValueOfPnL_BlackScholesRobustnessFormula(const model_params::Volatility vol, const model_params::Strike strikeprice, const std::date StartDate, const std::date EndDate, const std::vector<double> Spots, const model_params::InterestRate ir, const model_params::DividendYield dy, const std::string TypeOption)
     {
         std::size_t NbDays = Spots.size();
         
@@ -96,7 +96,7 @@ namespace BEV
         Gamma_Ssquared.push_back(option.GammaCash());
         RealizedDailyVariance.push_back(0.0);
         PnLVector.push_back(Prices[0]); // Receive the premium
-
+        
         for(std::size_t i = 1;i<NbDays-1;++i)
         {
             std::size_t NbDaysLeft;
@@ -128,12 +128,12 @@ namespace BEV
          std::cout << *i << ',';
          }
          std::cout << ")" << std::endl << std::endl;
-        std::cout << PnL << std::endl;*/
+         std::cout << PnL << std::endl;*/
         
         return PnL;
     }
     
-    const model_params::Volatility FindVolatility(const model_params::Strike strikeprice, const date StartDate, const date EndDate, const std::vector<double> Spots, const model_params::InterestRate ir, const model_params::DividendYield dy, const std::string TypeOption, const std::string method)
+    const model_params::Volatility FindVolatility(const model_params::Strike strikeprice, const std::date StartDate, const std::date EndDate, const std::vector<double> Spots, const model_params::InterestRate ir, const model_params::DividendYield dy, const std::string TypeOption, const std::string method)
     {
         // Use of Dichotomy in order to find the BreakEven Volatility
         double LowerBound = 0.;
@@ -187,7 +187,7 @@ namespace BEV
         for(std::size_t i = 0;i<Strikes.size();++i)
         {
             model_params::Strike strike(Strikes[i]);
-            model_params::Volatility vol = FindVolatility(strike,date(2016,06,30),date(2017,06,29),Spots,ir,dy,TypeOption,method);
+            model_params::Volatility vol = FindVolatility(strike,std::date(2016,06,30),std::date(2017,06,29),Spots,ir,dy,TypeOption,method);
             VolatilitySmile.push_back(vol);
         }
         
